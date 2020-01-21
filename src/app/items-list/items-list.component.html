@@ -1,23 +1,39 @@
-<mat-expansion-panel *ngFor="let partner of partners">
+<ng-container *ngFor="let partner of partners">
+<mat-expansion-panel *ngIf="partner?.orders.length">
+  <!-- <ng-container *ngIf="partner?.orders.length"> -->
   <!-- header prvog expendable    -->
   <mat-expansion-panel-header>
-        <mat-panel-title>
+  <ng-container>
+    <div class="row">
+      <div class="col-md">
+         <mat-panel-title>
             {{partner.name}}
+            {{partner.orders.length}}
         </mat-panel-title>
         <mat-panel-description>
             Opis
         </mat-panel-description>
-    </mat-expansion-panel-header>
+      </div>  
+    </div>   
+  </ng-container>
+  </mat-expansion-panel-header>
+
   <!-- body prvog expendable -->
     <mat-expansion-panel *ngFor="let order of partner.orders">
       <!-- header drugog expendable -->
       <mat-expansion-panel-header>
-          <mat-panel-title>
-              {{order.id}}
-          </mat-panel-title>
-          <mat-panel-description>
-              {{order.date}}
-          </mat-panel-description>
+          <ng-container>
+              <div class="row">
+                <div class="col-md">
+                   <mat-panel-title>
+                      {{order.id_ord}}
+                  </mat-panel-title>
+                  <mat-panel-description>
+                      {{order.date}}
+                  </mat-panel-description>
+                </div>  
+              </div>   
+            </ng-container>
       </mat-expansion-panel-header>
       <!-- body drugog expendable -->
       <table mat-table [dataSource]="order.data" class="mat-elevation-z8">
@@ -34,4 +50,6 @@
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
       </table>
     </mat-expansion-panel>
+  <!-- </ng-container> -->
 </mat-expansion-panel>
+</ng-container>

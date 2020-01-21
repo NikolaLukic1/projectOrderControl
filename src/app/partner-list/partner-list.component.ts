@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { DialogPartnerComponent } from '../dialog-partner/dialog-partner.component'
 import { PartnerService } from '../services/partner.service';
@@ -11,7 +11,9 @@ import { PartnerService } from '../services/partner.service';
   styleUrls: ['./partner-list.component.css']
 })
 export class PartnerListComponent implements OnInit {
+  @Input()  disableRipple: boolean;
   partners;
+  showAllItems : boolean;
   constructor(public dialog: MatDialog, private service: PartnerService) { }
 
   ngOnInit() {
@@ -28,11 +30,16 @@ export class PartnerListComponent implements OnInit {
       width: '250px',
       data: {name: param}
     });
+  
+
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
       this.animal = result;
     });
+  }
+  showAll(value){
+    this.showAllItems = value;
   }
 }
 
