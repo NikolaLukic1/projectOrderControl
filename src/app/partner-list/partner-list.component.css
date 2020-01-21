@@ -2,7 +2,9 @@
     padding: 10px;
     margin: 10px;
 }
-
+.mat-list-base{
+    padding-top: 0;
+}
 .mat-fab {
     position: fixed;
     left: 50%;
@@ -12,4 +14,10 @@
   }
 .test{
     background-color: grey;
+}
+
+.row-div {
+    margin-top: auto;
+    margin-right: 16px;
+    margin-left: 7px;
 }

@@ -1,4 +1,4 @@
-.example-container {
+/* .example-container {
     display: flex;
     flex-direction: column;
   }
@@ -8,6 +8,8 @@
   }
   .mat-dialog-actions{
     width: 100%;
+  } */
+
+  h1 {
+    text-align: center;
   }
-  .align-left{ float: left;}
-  .align-right{ float: right;}

@@ -6,7 +6,11 @@
                 </mat-form-field>
               </div>
 </div>
-<div mat-dialog-actions>
-  <button align="left" mat-mini-fab color="warn" (click)="onNoClick()">X</button>
-  <button align="right" mat-mini-fab color="primary" cdkFocusInitial>Ok</button>
+<div mat-dialog-actions class="row" >
+  <div class="col-sm" style="text-align:left">
+      <button mat-mini-fab color="warn" (click)="onNoClick()">X</button>
+  </div>
+  <div class="col-sm" style="text-align:right">
+      <button mat-mini-fab color="primary" cdkFocusInitial>Ok</button>
+  </div>
 </div>

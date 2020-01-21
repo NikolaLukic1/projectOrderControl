@@ -1,6 +1,11 @@
-<h1>Pregled partnera</h1>
-<div>
-        <mat-checkbox #vrednost (change)="vrednost.value = !vrednost.value" labelPosition="before">Prikazi Sve</mat-checkbox>
+<div class="row">
+    <h2 class="col-sm row-div" >Pregled partnera</h2>
+    <mat-checkbox
+    style="text-align: right;" 
+    class="col-sm row-div" 
+    #vrednost (change)="vrednost.value = !vrednost.value"
+    labelPosition="before">Prikazi Sve
+    </mat-checkbox>
 </div>
 <mat-selection-list>
     <ng-container *ngFor="let partner of partners">
