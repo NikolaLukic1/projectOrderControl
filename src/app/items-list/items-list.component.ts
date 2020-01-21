@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { PartnerService } from '../services/partner.service';
 export interface PeriodicElement {
   name: string;
   position: number;
@@ -26,11 +26,16 @@ const ELEMENT_DATA: PeriodicElement[] = [
   styleUrls: ['./items-list.component.css']
 })
 export class ItemsListComponent implements OnInit {
+  partners;
 
-  constructor() { }
+  constructor(private service: PartnerService) {}
 
   ngOnInit() {
+    this.service.getAll()
+       .subscribe(resp =>{this.partners = resp; console.log(this.partners)});
+    
+    console.log(this.partners);
   }
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
+  displayedColumns: string[] = ['code'];
   dataSource = ELEMENT_DATA;
 }
