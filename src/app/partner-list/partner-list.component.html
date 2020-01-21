@@ -1,0 +1,9 @@
+<h1>Pregled partnera</h1>
+<mat-list>
+    <ng-container *ngFor="let partner of partners">
+    <mat-list-item *ngIf="partner?.active" (click)="openDialog(partner.name)">
+        {{ partner.name }} <mat-divider></mat-divider>    
+    </mat-list-item>
+    </ng-container>
+</mat-list>
+<button mat-fab color="primary">+</button>

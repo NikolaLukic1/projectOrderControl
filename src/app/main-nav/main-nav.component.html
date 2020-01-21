@@ -6,9 +6,9 @@
     <mat-toolbar>Menu</mat-toolbar>
     <mat-nav-list>
       <a mat-list-item href="/followers">Welcome</a>
-      <a mat-list-item href="#">Partneri</a>
+      <a mat-list-item href="/partner">Partneri</a>
       <a mat-list-item href="#">Import porudzbina</a>
-      <a mat-list-item href="#">Pregled porudzbina</a>
+      <a mat-list-item href="/items">Pregled porudzbina</a>
       <a mat-list-item href="#">Izveštaj</a>
     </mat-nav-list>
   </mat-sidenav>
@@ -20,9 +20,9 @@
         mat-icon-button
         (click)="drawer.toggle()"
         *ngIf="isHandset$ | async">
-        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+        <mat-icon aria-hidden="false" aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <span>webSistemi</span>
+      <span style="font-size: 150%">Order Control</span>
     </mat-toolbar>
     <!-- Add Content Here -->
     <ng-content></ng-content>

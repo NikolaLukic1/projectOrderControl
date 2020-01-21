@@ -1,0 +1,13 @@
+.example-container {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .example-container > * {
+    width: 100%;
+  }
+  .mat-dialog-actions{
+    width: 100%;
+  }
+  .align-left{ float: left;}
+  .align-right{ float: right;}

@@ -13,24 +13,33 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatIconModule } from '@angular/material/icon';
+import {MatIconModule} from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { GithubFollowersComponent } from './github-followers/github-followers.component';
 import { NotFoundError } from './common/not-found-error';
 import { RouterModule, Routes } from '@angular/router';
 import { GithubFollowersService } from './services/github-followers.service';
 import { DataService } from './services/data.service';
+import { PartnerListComponent } from './partner-list/partner-list.component';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import { DialogPartnerComponent } from './dialog-partner/dialog-partner.component';
+import {  MatInputModule, MatExpansionModule, MatTable } from '@angular/material';
+import { PartnerService } from './services/partner.service';
+import { ItemsListComponent } from './items-list/items-list.component';
+import {MatTableModule} from '@angular/material/table';
 
-const appRoutes: Routes = [
-  { path: 'followers', component: GithubFollowersComponent }
-]
+
+
 
 @NgModule({
   declarations: [
     AppComponent,
     MainNavComponent,
-    GithubFollowersComponent
-    
+    GithubFollowersComponent,
+    PartnerListComponent,
+    DialogPartnerComponent,
+    ItemsListComponent    
   ],
   imports: [
     BrowserModule,
@@ -44,9 +53,15 @@ const appRoutes: Routes = [
     MatIconModule,
     MatListModule,
     HttpClientModule,
-    RouterModule.forRoot(appRoutes)
+    MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatExpansionModule,
+    MatTableModule
   ],
-  providers: [ GithubFollowersService, DataService ],
-  bootstrap: [AppComponent]
+  providers: [ GithubFollowersService, DataService, PartnerService ],
+  bootstrap: [AppComponent],
+  exports: [DialogPartnerComponent],
+  entryComponents: [DialogPartnerComponent]
 })
 export class AppModule { }
