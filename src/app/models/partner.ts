@@ -9,7 +9,7 @@ export class Partner {
     _id?: string;
 
     constructor(name: string,
-                @Optional() active?: boolean, 
+                active: boolean, 
                 @Optional() id?: string, 
                 @Optional() orders? : any[],
                 @Optional() _id? : string,

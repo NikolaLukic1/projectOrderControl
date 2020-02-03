@@ -3,7 +3,7 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog
 import { DialogPartnerComponent } from '../dialog-partner/dialog-partner.component'
 import { PartnerService } from '../services/partner.service';
 import { Partner } from '../models/partner';
-  
+import {Pipe } from '@angular/core';  
 
 @Component({
   selector: 'app-partner-list',
@@ -18,7 +18,7 @@ export class PartnerListComponent implements OnInit {
 
   ngOnInit() {
     this.service.getPartners()
-       .subscribe(resp =>{this.partners = resp; console.log(this.partners)});
+       .subscribe(resp =>{this.partners = Object.assign([], resp); console.log(this.partners)});
   }
 
   openDialog(param): void {
@@ -27,15 +27,25 @@ export class PartnerListComponent implements OnInit {
       data: new Partner(param.name,param.active, param.id, param.orders, param._id)
     });
     dialogRef.afterClosed().subscribe(async result => {
-      if(result!= undefined){
+     //return false; 
+      //console.log(result);
+      //this.partners = []; 
       await this.service.updatePartners(result)
-      .subscribe(res =>{this.partners.push(res); console.log(res[0].active)});
-      this.service.getPartners()
-       .subscribe(resp =>{this.partners = resp; console.log(this.partners)});
-      }
-
+      //.subscribe(res =>{this.partners.push(res); console.log(res[0].active)});
+      .subscribe(res => {this.ngOnInit(); console.log(res[0].active)})
+      
+      
+      // await this.service.getPartners()
+      // .subscribe(resp =>{this.partners = resp; console.log('get' , this.partners)});
+      
+  
     });
   }
+
+  // get partners12() {
+  //   console.log("pokrenuto")
+  //   return 1;
+  // }
 
   showAll(value){
     this.showAllItems = value;

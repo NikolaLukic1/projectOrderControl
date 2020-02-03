@@ -29,6 +29,8 @@ import { PartnerService } from './services/partner.service';
 import { ItemsListComponent } from './items-list/items-list.component';
 import {MatTableModule} from '@angular/material/table';
 import { FormsModule } from '@angular/forms';
+import { ImportComponent } from './import/import.component';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 
 
@@ -40,7 +42,8 @@ import { FormsModule } from '@angular/forms';
     GithubFollowersComponent,
     PartnerListComponent,
     DialogPartnerComponent,
-    ItemsListComponent    
+    ItemsListComponent,
+    ImportComponent    
   ],
   imports: [
     BrowserModule,
@@ -59,7 +62,9 @@ import { FormsModule } from '@angular/forms';
     MatInputModule,
     MatExpansionModule,
     MatTableModule,
-    FormsModule
+    FormsModule,
+    MatPaginatorModule,
+
   ],
   providers: [ GithubFollowersService, DataService, PartnerService ],
   bootstrap: [AppComponent],
