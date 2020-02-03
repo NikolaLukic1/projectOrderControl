@@ -6,18 +6,30 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import {throwError} from 'rxjs';
 import {catchError,map} from 'rxjs/operators';
-
+import { Partner } from '../models/partner'
 @Injectable()
 export class DataService {
   constructor(private url: string, private http: HttpClient) { }
 
-  getAll() {
+  getAll(){
 
     return this.http.get(this.url, { observe: 'response' }).pipe(
       map(res => res.body || []),
       catchError(this.handleError)
    );
       
+  }
+
+  public getPartners() : Observable<Partner[]> {
+    return this.http.get(this.url).pipe(
+      map((data: any[]) => data.map((item: any) => this._createPartnerFromObject(item))),
+    );
+  }
+
+  public updatePartners(partner: Partner) : Observable<Partner> {
+    return this.http.put<Partner>(this.url + '/updatedata', partner ).pipe(
+        catchError(this.handleError)
+    );
   }
 
   get(id) { 
@@ -42,6 +54,9 @@ export class DataService {
   //     .catch(this.handleError);
   // }
 
+  _createPartnerFromObject(item:any){
+    return new Partner(item.name, item.active, item.id, item.orders, item._id);
+  }
   private handleError(error: Response) {
     if (error.status === 400)
       return Observable.throw(new BadInput(error.json()));

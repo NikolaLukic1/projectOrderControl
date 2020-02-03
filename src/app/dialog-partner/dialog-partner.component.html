@@ -1,16 +1,22 @@
 <h1 mat-dialog-title>Izmena partnera</h1>
 <div mat-dialog-content>
         <div class="example-container">
+            <form class="example-container">
+                <mat-checkbox
+                [checked]="data.active"
+                labelPosition="before" #aktivnost>Status Aktivnosti
+                </mat-checkbox>
                 <mat-form-field>
-                  <input matInput placeholder="Input" [value]="data.name">
+                  <input matInput placeholder="Ime" [value]="data.name" #ime>
                 </mat-form-field>
-              </div>
+            </form>
+        </div>
 </div>
 <div mat-dialog-actions class="row" >
   <div class="col-sm" style="text-align:left">
       <button mat-mini-fab color="warn" (click)="onNoClick()">X</button>
   </div>
   <div class="col-sm" style="text-align:right">
-      <button mat-mini-fab color="primary" cdkFocusInitial>Ok</button>
+      <button mat-mini-fab color="primary" cdkFocusInitial (click)="onUpdateClick({active : aktivnost.checked , name : ime.value})">Ok</button>
   </div>
 </div>

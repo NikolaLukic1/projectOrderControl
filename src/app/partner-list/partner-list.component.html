@@ -7,10 +7,12 @@
     labelPosition="before">Prikazi Sve
     </mat-checkbox>
 </div>
-<mat-selection-list>
+<mat-selection-list color="blue">
     <ng-container *ngFor="let partner of partners">
-    <mat-list-option *ngIf="!vrednost.value ? partner.active : true "  (click)="openDialog(partner.name)" disableRipple="false" selected="partner.active" disabled="true">
-        {{ partner.name }} <mat-divider></mat-divider>    
+    <mat-list-option  *ngIf="!vrednost.value ? partner.active : true "  (click)="openDialog(partner)" disableRipple="false" [selected]="partner.active" disabled="true">
+        {{ partner.name }} {{partner.active}}
+        <p>iD : {{partner.id}}</p>
+        <mat-divider></mat-divider>
     </mat-list-option>
     </ng-container>
 </mat-selection-list>

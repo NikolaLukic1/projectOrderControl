@@ -28,6 +28,7 @@ import {  MatInputModule, MatExpansionModule, MatTable } from '@angular/material
 import { PartnerService } from './services/partner.service';
 import { ItemsListComponent } from './items-list/items-list.component';
 import {MatTableModule} from '@angular/material/table';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -57,7 +58,8 @@ import {MatTableModule} from '@angular/material/table';
     MatFormFieldModule,
     MatInputModule,
     MatExpansionModule,
-    MatTableModule
+    MatTableModule,
+    FormsModule
   ],
   providers: [ GithubFollowersService, DataService, PartnerService ],
   bootstrap: [AppComponent],

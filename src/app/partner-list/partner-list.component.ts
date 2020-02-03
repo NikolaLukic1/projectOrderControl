@@ -2,8 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { DialogPartnerComponent } from '../dialog-partner/dialog-partner.component'
 import { PartnerService } from '../services/partner.service';
-
- 
+import { Partner } from '../models/partner';
+  
 
 @Component({
   selector: 'app-partner-list',
@@ -12,32 +12,31 @@ import { PartnerService } from '../services/partner.service';
 })
 export class PartnerListComponent implements OnInit {
   @Input()  disableRipple: boolean;
-  partners;
+  partners : Partner[] = [];
   showAllItems : boolean;
   constructor(public dialog: MatDialog, private service: PartnerService) { }
 
   ngOnInit() {
-    this.service.getAll()
+    this.service.getPartners()
        .subscribe(resp =>{this.partners = resp; console.log(this.partners)});
   }
-
-
-  animal: string;
-  name: string;
 
   openDialog(param): void {
     const dialogRef = this.dialog.open(DialogPartnerComponent, {
       width: '250px',
-      data: {name: param}
+      data: new Partner(param.name,param.active, param.id, param.orders, param._id)
     });
-  
+    dialogRef.afterClosed().subscribe(async result => {
+      if(result!= undefined){
+      await this.service.updatePartners(result)
+      .subscribe(res =>{this.partners.push(res); console.log(res[0].active)});
+      this.service.getPartners()
+       .subscribe(resp =>{this.partners = resp; console.log(this.partners)});
+      }
 
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      this.animal = result;
     });
   }
+
   showAll(value){
     this.showAllItems = value;
   }

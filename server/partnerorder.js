@@ -37,7 +37,7 @@ router.put("/updatedata", async (req,res) => {
         if (err) throw err;
         });
         
-    res.status(200).send();
+    res.status(200).send(await data.find({}).toArray());
 });
 
 
