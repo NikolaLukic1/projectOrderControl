@@ -31,6 +31,10 @@ import {MatTableModule} from '@angular/material/table';
 import { FormsModule } from '@angular/forms';
 import { ImportComponent } from './import/import.component';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatSelectModule} from '@angular/material/select';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatNativeDateModule, MatRippleModule} from '@angular/material/core';
+
 
 
 
@@ -64,7 +68,9 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     MatTableModule,
     FormsModule,
     MatPaginatorModule,
-
+    MatSelectModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   providers: [ GithubFollowersService, DataService, PartnerService ],
   bootstrap: [AppComponent],

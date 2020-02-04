@@ -1,6 +1,5 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import * as XLSX from 'xlsx';
-import {saveAs} from 'file-saver';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
 
@@ -21,22 +20,26 @@ export interface ProductElement {
 
 
 export class ImportComponent implements OnInit{
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
   displayedColumns: string[] = ['code', 'product', 'total'];
 
   name = 'This is XLSX TO JSON CONVERTER';
   willDownload = false;
   dataHelper : ProductElement[] = [];
-  dataSource = new MatTableDataSource<ProductElement>(this.dataHelper);
+  dataSource = new MatTableDataSource<ProductElement>();
+  tableView = false;
 
   constructor() {
 
    }
+   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
   ngOnInit(){
     this.dataSource.paginator = this.paginator;
   }
+
+
+
   onFileChange(ev) {
     let workBook = null;
     let jsonData = null;
@@ -53,7 +56,9 @@ export class ImportComponent implements OnInit{
       const dataString = JSON.stringify(jsonData);
       console.log( new MatTableDataSource<ProductElement>(JSON.parse(dataString).gc));
       this.dataHelper = JSON.parse(dataString).gc;
-      this.dataSource.data = this.dataHelper;
+      this.dataSource = new MatTableDataSource<ProductElement>(this.dataHelper);
+      console.log(this.dataSource);
+      this.tableView = true;
     }
     reader.readAsBinaryString(file);
   }
