@@ -2,6 +2,8 @@ import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import * as XLSX from 'xlsx';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
+import { PartnerService } from '../services/partner.service';
+import { Partner } from '../models/partner';
 
 
 
@@ -22,6 +24,7 @@ export interface ProductElement {
 export class ImportComponent implements OnInit{
 
   displayedColumns: string[] = ['code', 'product', 'total'];
+  partners : Partner[] = [];
 
   name = 'This is XLSX TO JSON CONVERTER';
   willDownload = false;
@@ -29,13 +32,14 @@ export class ImportComponent implements OnInit{
   dataSource = new MatTableDataSource<ProductElement>();
   tableView = false;
 
-  constructor() {
+  constructor(private service: PartnerService) {
 
    }
    @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
   ngOnInit(){
-    this.dataSource.paginator = this.paginator;
+    this.service.getPartners()
+    .subscribe(resp =>{this.partners = Object.assign([], resp); console.log(this.partners)});
   }
 
 

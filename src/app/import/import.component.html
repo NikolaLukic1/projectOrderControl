@@ -14,8 +14,11 @@
 		<mat-form-field>
 				<mat-label>Favorite food</mat-label>
 				<mat-select>
+
 					<mat-option *ngFor="let partner of partners" >
+					<ng-container *ngIf = "partner.active" >
 						{{partner.name}}
+					</ng-container>
 					</mat-option>
 				</mat-select>
 			</mat-form-field>
@@ -28,8 +31,7 @@
 		</mat-form-field>	
 	</div>
 	<div class="col-md-3 h-100 justify-content-center align-items-right">
-			<button mat-button>Click me!</button>
-
+			<button (click)="dodajPoudzbinu()" mat-button>Dodaj order</button>
 	</div>
 </div>
 <div class="mat-elevation-z8">
