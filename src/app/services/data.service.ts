@@ -11,18 +11,10 @@ import { Partner } from '../models/partner'
 export class DataService {
   constructor(private url: string, private http: HttpClient) { }
 
-  getAll(){
-
-    return this.http.get(this.url, { observe: 'response' }).pipe(
-      map(res => res.body || []),
-      catchError(this.handleError)
-   );
-      
-  }
-
   public getPartners() : Observable<Partner[]> {
     return this.http.get(this.url).pipe(
       map((data: any[]) => data.map((item: any) => this._createPartnerFromObject(item))),
+      catchError(this.handleError)
     );
   }
 
@@ -39,31 +31,11 @@ export class DataService {
     );
   }
 
-  get(id) { 
-    return this.http.get(this.url + '/' + id, {observe : 'response'}).pipe(
-      map(res => res.body || []),
-      catchError(this.handleError)
-   );
-  }
-
-  create(resource) {
-      return this.http.post(this.url, JSON.stringify(resource), {observe : 'response'}).pipe(
-        map(res => res.body || []),
-        catchError(this.handleError)
-     );
-  }
-
-
-  // delete(id) {
-  //   return this.http.delete(this.url + '/' + id)
-  //     .map(response => response.json())
-  //     .toPromise()
-  //     .catch(this.handleError);
-  // }
 
   _createPartnerFromObject(item:any){
     return new Partner(item.name, item.active, item.id, item.orders, item._id);
   }
+
   private handleError(error: Response) {
     if (error.status === 400)
       return Observable.throw(new BadInput(error.json()));

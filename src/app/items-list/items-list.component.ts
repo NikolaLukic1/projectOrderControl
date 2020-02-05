@@ -31,11 +31,11 @@ export class ItemsListComponent implements OnInit {
   constructor(private service: PartnerService) {}
 
   ngOnInit() {
-    this.service.getAll()
-       .subscribe(resp =>{this.partners = resp; console.log(this.partners)});
-    
-    console.log(this.partners);
+    this.service.getPartners()
+       .subscribe(resp =>{this.partners = resp;});
   }
+
+  
   displayedColumns: string[] = ['code', 'product', 'total'];
   dataSource = ELEMENT_DATA;
 }
