@@ -1,0 +1,97 @@
+<mat-expansion-panel [expanded] = "!finalData.length">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Filter data
+      </mat-panel-title>
+      <mat-panel-description>
+        Unesite filtere za pretragu
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <!-- forma -->
+    <form [formGroup]="aForm">
+
+    <mat-form-field style="width:100%">
+        <mat-label>Partner</mat-label>
+        <mat-select formControlName = "selectForm" >
+            <ng-container *ngFor="let partner of partners">
+            <mat-option *ngIf = "partner.active" [value]="partner">
+                {{partner.name}}
+            </mat-option>
+            </ng-container>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field style="width:100%">
+        <mat-label>Proizvod</mat-label>
+        <mat-select formControlName = "selectForm1">
+            <ng-container *ngFor="let product of products">
+            <mat-option [value]="product.code">
+                {{product.product}}
+            </mat-option>
+            </ng-container>
+        </mat-select>
+    </mat-form-field>
+    </form>
+
+
+    <div class='row'>
+    <div class="col">
+    <button mat-fab color="warn" [hidden]="!finalData.length" 
+    (click)="clearFilter()">
+        <mat-icon aria-hidden="false" aria-label="Example home icon">refresh</mat-icon>
+    </button>
+    </div>
+    <div class="col" style="text-align: right">    
+    <button mat-fab color="primary" 
+    (click)="filter()">
+        <mat-icon aria-hidden="false" aria-label="Example home icon">check</mat-icon>
+    </button>
+    </div>
+    </div>
+</mat-expansion-panel>        
+
+  <ng-container *ngFor="let partner of finalData">
+        <mat-expansion-panel *ngIf="partner?.dataSet.length">
+          <!-- <ng-container *ngIf="partner?.orders.length"> -->
+          <!-- header prvog expendable    -->
+          <mat-expansion-panel-header>
+          <ng-container>
+            <div class="row">
+              <div class="col-md">
+                 <mat-panel-title>
+                    {{partner.name}}
+                </mat-panel-title>
+                <mat-panel-description>
+                    iD : {{partner.id}}
+                </mat-panel-description>
+              </div>  
+            </div>   
+          </ng-container>
+          </mat-expansion-panel-header>
+        
+          <!-- body prvog expendable -->
+              <table mat-table [dataSource]="partner.dataSet" class="mat-elevation-z8">
+        
+                <!--- Note that these columns can be defined in any order.
+                      The actual rendered columns are set as a property on the row definition" -->
+              
+                <!-- Position Column -->
+                <ng-container matColumnDef="code">
+                  <th mat-header-cell *matHeaderCellDef> Code </th>
+                  <td mat-cell *matCellDef="let element"> {{element.code}} </td>
+                </ng-container>
+                <ng-container matColumnDef="product">
+                    <th mat-header-cell *matHeaderCellDef> Product </th>
+                    <td mat-cell *matCellDef="let element"> {{element.product}} </td>
+                </ng-container>
+                <ng-container matColumnDef="total">
+                    <th mat-header-cell *matHeaderCellDef> Total </th>
+                    <td mat-cell *matCellDef="let element"> {{element.total}} </td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+              </table>
+          <!-- </ng-container> -->
+        </mat-expansion-panel>
+        </ng-container>

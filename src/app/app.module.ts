@@ -34,6 +34,9 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule, MatRippleModule} from '@angular/material/core';
 import { DialogPartnerInsertComponent } from './dialog-partner-insert/dialog-partner-insert.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { WelcomeComponent } from './welcome/welcome.component';
+import { ReportComponent } from './report/report.component';
+import {  ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -48,7 +51,9 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     DialogPartnerComponent,
     ItemsListComponent,
     ImportComponent,
-    DialogPartnerInsertComponent    
+    DialogPartnerInsertComponent,
+    WelcomeComponent,
+    ReportComponent    
   ],
   imports: [
     BrowserModule,
@@ -72,7 +77,8 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     MatSelectModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    ReactiveFormsModule
   ],
   providers: [  DataService, PartnerService ],
   bootstrap: [AppComponent],
