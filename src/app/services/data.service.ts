@@ -26,6 +26,13 @@ export class DataService {
     );
   }
 
+  public insertPartners(partner: Partner) : Observable<Partner> {
+    return this.http.post<Partner>(this.url, partner ).pipe(
+        catchError(this.handleError)
+    );
+  }
+
+
   public updatePartners(partner: Partner) : Observable<Partner> {
     return this.http.put<Partner>(this.url + '/updatedata', partner ).pipe(
         catchError(this.handleError)

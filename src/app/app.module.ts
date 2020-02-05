@@ -15,10 +15,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import {MatIconModule} from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
-import { GithubFollowersComponent } from './github-followers/github-followers.component';
 import { NotFoundError } from './common/not-found-error';
 import { RouterModule, Routes } from '@angular/router';
-import { GithubFollowersService } from './services/github-followers.service';
 import { DataService } from './services/data.service';
 import { PartnerListComponent } from './partner-list/partner-list.component';
 import {MatDialogModule} from '@angular/material/dialog';
@@ -34,6 +32,9 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSelectModule} from '@angular/material/select';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule, MatRippleModule} from '@angular/material/core';
+import { DialogPartnerInsertComponent } from './dialog-partner-insert/dialog-partner-insert.component';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+
 
 
 
@@ -43,11 +44,11 @@ import {MatNativeDateModule, MatRippleModule} from '@angular/material/core';
   declarations: [
     AppComponent,
     MainNavComponent,
-    GithubFollowersComponent,
     PartnerListComponent,
     DialogPartnerComponent,
     ItemsListComponent,
-    ImportComponent    
+    ImportComponent,
+    DialogPartnerInsertComponent    
   ],
   imports: [
     BrowserModule,
@@ -70,11 +71,12 @@ import {MatNativeDateModule, MatRippleModule} from '@angular/material/core';
     MatPaginatorModule,
     MatSelectModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatSnackBarModule
   ],
-  providers: [ GithubFollowersService, DataService, PartnerService ],
+  providers: [  DataService, PartnerService ],
   bootstrap: [AppComponent],
-  exports: [DialogPartnerComponent],
-  entryComponents: [DialogPartnerComponent]
+  exports: [DialogPartnerComponent, DialogPartnerInsertComponent],
+  entryComponents: [DialogPartnerComponent, DialogPartnerInsertComponent]
 })
 export class AppModule { }

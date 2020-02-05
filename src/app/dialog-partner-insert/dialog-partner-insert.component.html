@@ -1,0 +1,22 @@
+<h1 mat-dialog-title>Dodavanje partnera</h1>
+<div mat-dialog-content>
+        <div class="example-container">
+            <form class="example-container">
+                <mat-checkbox
+                [checked]="true"
+                labelPosition="before" #aktivnost>Status Aktivnosti
+                </mat-checkbox>
+                <mat-form-field>
+                  <input matInput placeholder="Ime" #ime>
+                </mat-form-field>
+            </form>
+        </div>
+</div>
+<div mat-dialog-actions class="row" >
+  <div class="col-sm" style="text-align:left">
+      <button mat-mini-fab color="warn" (click)="onNoClick()">X</button>
+  </div>
+  <div class="col-sm" style="text-align:right">
+      <button mat-mini-fab color="primary" cdkFocusInitial (click)="onInsertClick({active : aktivnost.checked , name : ime.value})">Ok</button>
+  </div>
+</div>

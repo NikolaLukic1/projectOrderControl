@@ -11,12 +11,12 @@
 <mat-selection-list color="blue">
     <ng-container *ngFor="let partner of partners">
     <mat-list-option   *ngIf="!vrednost.value ? partner.active : true "  (click)="openDialog(partner)" disableRipple="false" [selected]="partner.active" disabled="true">
-        {{ partner.name }} {{partner.active}}
+        {{ partner.name }}
         <p>iD : {{partner.id}}</p>
         <mat-divider></mat-divider>
     </mat-list-option>
     </ng-container>
 </mat-selection-list>
-<button mat-fab color="primary">
+<button mat-fab color="primary" (click)="openDialogInsert()">
     <mat-icon>add</mat-icon>
 </button>

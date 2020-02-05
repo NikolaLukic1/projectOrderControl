@@ -13,8 +13,6 @@ import { PartnerService } from '../services/partner.service';
 export class DialogPartnerComponent {
 
 
-  options : FormGroup;
-  response;
   constructor(
     public dialogRef: MatDialogRef<DialogPartnerComponent>,
     @Inject(MAT_DIALOG_DATA) public data: Partner,
@@ -29,11 +27,15 @@ export class DialogPartnerComponent {
      let orders = this.data.orders;
      //console.log(active,name);
      //console.log();
-
+     if(this.data.active == active && this.data.name == name){
+     this.dialogRef.close();
+     } else {
      this.dialogRef.close(new Partner(name,active, id, orders, _id));
+    }
    }  
 
   onNoClick(): void {
+    console.log('close')
     this.dialogRef.close();
   }
 }

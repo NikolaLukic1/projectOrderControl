@@ -4,7 +4,7 @@ import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
 import { PartnerService } from '../services/partner.service';
 import { Partner } from '../models/partner';
-
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 
 export interface ProductElement {
@@ -22,7 +22,7 @@ export interface ProductElement {
 
 
 export class ImportComponent implements OnInit{
-
+  selected = '';
   displayedColumns: string[] = ['code', 'product', 'total'];
   partners : Partner[] = [];
 
@@ -32,7 +32,7 @@ export class ImportComponent implements OnInit{
   dataSource = new MatTableDataSource<ProductElement>();
   tableView = false;
 
-  constructor(private service: PartnerService) {
+  constructor(private service: PartnerService,private _snackBar: MatSnackBar) {
 
    }
    @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
@@ -42,7 +42,35 @@ export class ImportComponent implements OnInit{
     .subscribe(resp =>{this.partners = Object.assign([], resp); console.log(this.partners)});
   }
 
+  dodajPorudzbinu(param, newOrderDate){
+    let id = param.id;
+    let _id = param._id;
+    let active = param.active;
+    let name = param.name;
+    
+    let orders = this.addNewOrder(param.orders, newOrderDate, this.dataHelper);
+    this.service.updatePartners(new Partner(name,active,id,orders,_id))
+      .subscribe(res => {this.ngOnInit(); this.openSnackBar("Uspesno dodata porudzbina!", 'Zatvori');})
+    this.tableView = false;
+  }
 
+  addNewOrder(oldOrderArray , newOrderDate, newOrder){
+    let newId;
+
+    if(oldOrderArray.length > 0){
+    newId = oldOrderArray[oldOrderArray.length -1].id_ord + 1;
+    }
+    else newId = 1;
+    
+    let finalObject = {
+      id_ord : newId,
+      date : newOrderDate,
+      data : newOrder
+    }
+    oldOrderArray.push(finalObject);
+
+    return oldOrderArray;
+  }
 
   onFileChange(ev) {
     let workBook = null;
@@ -58,13 +86,18 @@ export class ImportComponent implements OnInit{
         return initial;
       }, {});
       const dataString = JSON.stringify(jsonData);
-      console.log( new MatTableDataSource<ProductElement>(JSON.parse(dataString).gc));
       this.dataHelper = JSON.parse(dataString).gc;
       this.dataSource = new MatTableDataSource<ProductElement>(this.dataHelper);
-      console.log(this.dataSource);
+      console.log(this.dataHelper);
       this.tableView = true;
     }
     reader.readAsBinaryString(file);
+  }
+
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {
+      duration: 2000,
+    });
   }
 }
 

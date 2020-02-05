@@ -17,7 +17,7 @@ router.post('/', async(req,res) => {
     await data.insertOne(
         req.body
     );
-    res.status(201).send();
+    res.status(201).send(await data.find({id : req.body.id}).toArray());
 });
 
 

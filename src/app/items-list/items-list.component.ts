@@ -36,6 +36,6 @@ export class ItemsListComponent implements OnInit {
     
     console.log(this.partners);
   }
-  displayedColumns: string[] = ['code'];
+  displayedColumns: string[] = ['code', 'product', 'total'];
   dataSource = ELEMENT_DATA;
 }
