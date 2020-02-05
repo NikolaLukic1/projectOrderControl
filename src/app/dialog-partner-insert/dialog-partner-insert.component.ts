@@ -34,7 +34,7 @@ export class DialogPartnerInsertComponent {
     var getPart = text.replace ( /[^\d.]/g, '' ); // returns id like 0023
     var num = parseInt(getPart); // returns int
     var newVal = num+1; // returns nextValue
-    var reg = new RegExp(num); // create dynamic regexp
+    var reg = new RegExp(num.toString()); // create dynamic regexp
     var newstring = text.replace ( reg, newVal ); // returns 000id
 
     return newstring;

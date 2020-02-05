@@ -51,8 +51,7 @@ export class PartnerListComponent implements OnInit {
     dialogRef.afterClosed().subscribe(async result => {
       if(result !== undefined){
         await this.service.insertPartners(result)
-        .subscribe(res => { this.ngOnInit();
-          console.log(res);  
+        .subscribe(res => { this.ngOnInit();  
           this.openSnackBar(`Uspešno dodat partner ${res[0].name}`, 'Zatvori');}
           )
         }
