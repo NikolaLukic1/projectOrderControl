@@ -7,7 +7,7 @@ import { WelcomeComponent } from './welcome/welcome.component'
 import { ReportComponent } from './report/report.component'
 
 const routes: Routes = [
-  { path: '', redirectTo: 'partner', pathMatch: 'full'},
+  { path: '', redirectTo: 'welcome', pathMatch: 'full'},
   { path: 'welcome', component: WelcomeComponent },
   { path: 'partner', component : PartnerListComponent},
   { path: 'items', component : ItemsListComponent},

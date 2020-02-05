@@ -5,12 +5,11 @@
 				<div class="row h-100 justify-content-center align-items-center">
 						<input type="file" (change)="onFileChange($event)" /> 
 				</div>  
-	</div>
-	<!-- <input type="file" (change)="onFileChange($event)" /> -->
+		</div>
 </ng-template>
-<ng-template #ima>
-<div class="row">
-	<div class="col-md-3">
+
+<ng-template #ima class="top-template">
+
 		<mat-form-field>
 				<mat-label>Partner</mat-label>
 				<mat-select #option>
@@ -20,19 +19,19 @@
 					</mat-option>
 					</ng-container>
 				</mat-select>
-			</mat-form-field>
-	</div>	
-	<div class="col-md-3">
-	<mat-form-field>
-			<input matInput [matDatepicker]="picker" placeholder="Choose a date" #datePicker>
+		</mat-form-field>
+
+		<mat-form-field>
+			<input matInput [matDatepicker]="picker" placeholder="Odaberi datum" #datePicker>
 			<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
 			<mat-datepicker #picker></mat-datepicker>
 		</mat-form-field>	
-	</div>
-	<div class="col-md-3 h-100 justify-content-center align-items-right">
-			<button (click)="dodajPorudzbinu(option.value, datePicker.value)" mat-button>Dodaj order</button>
-	</div>
-</div>
+		
+		<div class='row' style="margin-bottom: 20px; margin-right: 20px">
+			<div class='col' style="text-align: right">
+				<button (click)="dodajPorudzbinu(option.value, datePicker.value)" mat-raised-button color="primary">Dodaj order</button>
+			</div>	
+		</div>
 <div class="mat-elevation-z8">
 <table  mat-table [dataSource]="dataSource" >
 
